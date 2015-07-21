@@ -14,7 +14,7 @@
         console.error(errorStr);
     };
 
-    var weatherCtrlFn = function weatherCtrlFn(weatherService) {
+    var weatherCtrlFn = function($routeParams, weatherService) {
         var ctrl = this;
 
         ctrl.message = "Pizza Party";
@@ -55,6 +55,18 @@
                 });
         };
 
+        ctrl.renderForecastPage = function() {
+            var cityName = $routeParams.cityName;
+            ctrl.city = cityName;
+            weatherService.getForecast(cityName)
+                .then(function(result) {
+                    ctrl.forecastItems = result.data.list;
+                },
+                function() {
+                    showErrMsg(ctrl, "OpenWeatherMap.org API call failed");
+                });
+        }
+
         ctrl.refreshWeather();
 
         ctrl.getDate = function(time) {
@@ -63,5 +75,5 @@
 
         return ctrl;
     };
-    app.controller("WeatherCtrl", ["WeatherService", weatherCtrlFn]);
+    app.controller("WeatherCtrl", ["$routeParams", "WeatherService", weatherCtrlFn]);
 }());

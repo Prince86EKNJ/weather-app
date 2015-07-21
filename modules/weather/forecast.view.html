@@ -1,0 +1,16 @@
+<div ng-init="vm.renderForecastPage()">
+    <h1>Forecast: {{vm.city}}</h1>
+    <a href="#/">Back</a>
+    <table class="forecastTable">
+        <tbody>
+        <tr ng-repeat="item in vm.forecastItems">
+            <td>{{ vm.getDate(item.dt).format("MMMM Do YYYY, h:mm:ss a") }}</td>
+            <td>{{ item.main.temp }} &deg;F</td>
+            <td>{{ item.weather[0].main }}</td>
+            <td>
+                <img src="http://openweathermap.org/img/w/{{ item.weather[0].icon }}.png" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

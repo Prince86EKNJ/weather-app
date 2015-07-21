@@ -4,7 +4,10 @@ var app = (function(){
     var config = function($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: "modules/weather/main.view.html",
+                templateUrl: "modules/weather/main.view.html"
+            })
+            .when("/forecast/:cityName", {
+                templateUrl: "modules/weather/forecast.view.html"
             })
             .otherwise({ redirectTo: '/' });
 

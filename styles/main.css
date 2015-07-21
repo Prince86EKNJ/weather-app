@@ -1,0 +1,14 @@
+/* Styles go here */
+.errorMsg {
+    color: red;
+    font-weight: bold;
+}
+
+.tempView {
+    color: darkblue;
+    font-weight: bold;
+}
+
+.forecastTable td {
+    border: 1px solid black;
+}

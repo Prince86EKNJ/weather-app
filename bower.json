@@ -1,0 +1,15 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "authors": [
+    "Edward Nicholes Jr."
+  ],
+  "license": "GPL-2.0",
+  "dependencies": {
+    "angular": "~1.4.3",
+    "moment": "~2.10.3",
+    "lodash": "~3.10.0",
+    "jquery": "~2.1.4",
+    "angular-route": "~1.4.3"
+  }
+}

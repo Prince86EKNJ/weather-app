@@ -1,6 +1,7 @@
 var gulp = require("gulp");
 var browserSync = require("browser-sync").create();
 var inject = require("gulp-inject");
+var mainBowerFiles = require("main-bower-files");
 
 var paths = {
     scripts: ["modules/**/*.module.js", "modules/**/*.js"],
@@ -20,12 +21,13 @@ gulp.task("browser-sync", function() {
 });
 
 gulp.task("inject", function() {
+
+    var moduleFiles = gulp.src(paths.scripts, { read: false });
+    var bowerFiles = gulp.src(mainBowerFiles(), { read: false });
+
     gulp.src("./index.html")
-        .pipe(
-        inject(
-            gulp.src(paths.scripts, { read: false })
-        )
-    )
+        .pipe(inject(moduleFiles))
+        .pipe(inject(bowerFiles, { name: "bower" }))
         .pipe(gulp.dest("./"));
 })
 

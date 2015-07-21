@@ -6,43 +6,18 @@
 </head>
 
 <body>
-<div ng-controller="WeatherCtrl">
-    <h1>Hello {{ message }}!</h1>
-    <div class="errorMsg" ng-show="errorMsg">{{ errorMsg }}</div>
-    <div class="tempView">
-        {{ city }}'s Temperature: {{ weather.main.temp }}
-    </div>
-    <form ng-submit="refreshWeather()">
-        <div>
-            City Name: <input type="text" ng-model="cityNameTextBox" />
-        </div>
-        <button type="submit" ng-click="refreshWeather()">Get</button>
-    </form>
-    <table class="forecastTable">
-        <tbody>
-        <tr ng-repeat="item in forecastItems">
-            <td>{{ getDate(item.dt).format("MMMM Do YYYY, h:mm:ss a") }}</td>
-            <td>{{ item.main.temp }} &deg;F</td>
-            <td>{{ item.weather[0].main }}</td>
-            <td>
-                <img src="http://openweathermap.org/img/w/{{ item.weather[0].icon }}.png" />
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div ng-view></div>
 </body>
 
 </html>
 
 <!-- bower:js -->
-<script src="lib/angular/angular.js"></script>
-<script src="lib/angular-route/angular-route.js"></script>
-
-<script src="lib/moment/moment.js"></script>
-<script src="lib/lodash/lodash.js"></script>
-<script src="lib/jquery/dist/jquery.js"></script>
-<!-- bower -->
+<script src="/lib/angular/angular.js"></script>
+<script src="/lib/moment/moment.js"></script>
+<script src="/lib/lodash/lodash.js"></script>
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/angular-route/angular-route.js"></script>
+<!-- endinject -->
 
 <!-- inject:js -->
 <script src="/modules/weather/weather.module.js"></script>

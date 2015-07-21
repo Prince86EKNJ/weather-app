@@ -14,50 +14,54 @@
         console.error(errorStr);
     };
 
-    var weatherCtrlFn = function weatherCtrlFn($scope, weatherService) {
-        $scope.message = "Pizza Party";
-        $scope.city = "Kansas City";
+    var weatherCtrlFn = function weatherCtrlFn(weatherService) {
+        var ctrl = this;
 
-        $scope.cityNameTextBox = $scope.city;
+        ctrl.message = "Pizza Party";
+        ctrl.city = "Kansas City";
 
-        $scope.refreshWeather = function() {
+        ctrl.cityNameTextBox = ctrl.city;
 
-            if(_.trim($scope.cityNameTextBox).length === 0) {
-                showErrMsg($scope, "Please enter a city");
+        ctrl.refreshWeather = function() {
+
+            if(_.trim(ctrl.cityNameTextBox).length === 0) {
+                showErrMsg(ctrl, "Please enter a city");
                 return;
             } else {
-                clearErrMsg($scope);
-                $scope.city = $scope.cityNameTextBox;
+                clearErrMsg(ctrl);
+                ctrl.city = ctrl.cityNameTextBox;
             }
 
-            weatherService.getWeather($scope.city)
+            weatherService.getWeather(ctrl.city)
                 .then(function populateView(result) {
                     var data = result.data;
                     if(data.message) {
-                        showErrMsg($scope, data.message);
+                        showErrMsg(ctrl, data.message);
                         return;
                     }
 
-                    $scope.weather = data;
+                    ctrl.weather = data;
                 },
                 function() {
-                    showErrMsg($scope, "OpenWeatherMap.org API call failed");
+                    showErrMsg(ctrl, "OpenWeatherMap.org API call failed");
                 });
 
-            weatherService.getForecast($scope.city)
+            weatherService.getForecast(ctrl.city)
                 .then(function(result) {
-                    $scope.forecastItems = result.data.list;
+                    ctrl.forecastItems = result.data.list;
                 },
                 function() {
-                    showErrMsg($scope, "OpenWeatherMap.org API call failed");
+                    showErrMsg(ctrl, "OpenWeatherMap.org API call failed");
                 });
         };
 
-        $scope.refreshWeather();
+        ctrl.refreshWeather();
 
-        $scope.getDate = function(time) {
+        ctrl.getDate = function(time) {
             return new moment.unix(time);
         }
+
+        return ctrl;
     };
-    app.controller("WeatherCtrl", ["$scope", "WeatherService", weatherCtrlFn]);
+    app.controller("WeatherCtrl", ["WeatherService", weatherCtrlFn]);
 }());

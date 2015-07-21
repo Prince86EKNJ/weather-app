@@ -1,9 +1,16 @@
 var app = (function(){
     'user strict';
 
-    var app = angular.module("weatherApp", ["ngRoute"])
-        .config(function() {
+    var config = function($routeProvider) {
+        $routeProvider
+            .when('/', {
+                templateUrl: "modules/weather/main.view.html",
+            })
+            .otherwise({ redirectTo: '/' });
 
-        });
+    };
+
+    var app = angular.module("weatherApp", ["ngRoute"])
+        .config(["$routeProvider", config]);
     return app;
 }());

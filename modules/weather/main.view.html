@@ -1,0 +1,25 @@
+<div ng-controller="WeatherCtrl as vm">
+    <h1>Hello {{ vm.message }}!</h1>
+    <div class="errorMsg" ng-show="vm.errorMsg">{{ vm.errorMsg }}</div>
+    <div class="tempView">
+        {{ vm.city }}'s Temperature: {{ vm.weather.main.temp }}
+    </div>
+    <form ng-submit="refreshWeather()">
+        <div>
+            City Name: <input type="text" ng-model="vm.cityNameTextBox" />
+        </div>
+        <button type="submit" ng-click="vm.refreshWeather()">Get</button>
+    </form>
+    <table class="forecastTable">
+        <tbody>
+        <tr ng-repeat="item in vm.forecastItems">
+            <td>{{ vm.getDate(item.dt).format("MMMM Do YYYY, h:mm:ss a") }}</td>
+            <td>{{ item.main.temp }} &deg;F</td>
+            <td>{{ item.weather[0].main }}</td>
+            <td>
+                <img src="http://openweathermap.org/img/w/{{ item.weather[0].icon }}.png" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

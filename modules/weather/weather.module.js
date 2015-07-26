@@ -1,7 +1,7 @@
 var app = (function(){
     'user strict';
 
-    var config = function($routeProvider) {
+    var config = function($routeProvider, $httpProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: "modules/weather/main.view.html"
@@ -11,9 +11,11 @@ var app = (function(){
             })
             .otherwise({ redirectTo: '/' });
 
+            $httpProvider.interceptors.push("httpInterceptor");
     };
 
     var app = angular.module("weatherApp", ["ngRoute"])
-        .config(["$routeProvider", config]);
+        .config(["$routeProvider", "$httpProvider", config]);
     return app;
 }());
+

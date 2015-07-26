@@ -6,6 +6,7 @@
 </head>
 
 <body>
+    <loader>Hello, I'm loading</loader>
     <div ng-controller="WeatherCtrl as vm">
         <div ng-view></div>
     </div>
@@ -15,14 +16,16 @@
 
 <!-- bower:js -->
 <script src="/lib/angular/angular.js"></script>
+<script src="/lib/angular-route/angular-route.js"></script>
 <script src="/lib/moment/moment.js"></script>
 <script src="/lib/lodash/lodash.js"></script>
 <script src="/lib/jquery/dist/jquery.js"></script>
-<script src="/lib/angular-route/angular-route.js"></script>
 <!-- endinject -->
 
 <!-- inject:js -->
 <script src="/modules/weather/weather.module.js"></script>
+<script src="/modules/weather/http.interceptor.js"></script>
+<script src="/modules/weather/loader.directive.js"></script>
 <script src="/modules/weather/weather-ctrl.js"></script>
 <script src="/modules/weather/weather-service.js"></script>
 <!-- endinject -->
